@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-
+using OpenQA.Selenium.Support.UI;
 
 namespace Selenium {
     public class Selenium
@@ -10,7 +10,7 @@ namespace Selenium {
         {
             Selenium s = new Selenium();
 
-            s.StartChromeDriver();
+            /*s.StartChromeDriver();
             s.FindTitle();
             s.FindURL();
             s.FindLogo();
@@ -20,9 +20,14 @@ namespace Selenium {
             s.NavigateForward();
             s.Refresh();  
             s.Quit();
+
             s.StartChromeDriver();
             s.ClickAccount();
-            s.Quit(); 
+            s.Quit(); */
+
+            s.StartChromeDriver();
+            s.ListLanquages(1);
+            s.Quit();
 
         }
         public void StartChromeDriver()
@@ -88,5 +93,16 @@ namespace Selenium {
             IWebElement clickLogo = webDriver.FindElement(By.CssSelector("#header > div > div.skip-links > div > a > span.label"));
             clickLogo.Click();
         }
+        public void ListLanquages(int number)
+        {
+            IWebElement language = webDriver.FindElement(By.Id("select-language"));
+
+            SelectElement l = new SelectElement(language);
+
+            Console.WriteLine("Number Lanquages List " + l.Options.Count);
+
+            l.SelectByIndex(number);
+        }
+
     }
 }
