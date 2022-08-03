@@ -27,22 +27,24 @@ namespace Selenium {
 
             s.StartChromeDriver();
             s.ListLanquages(1);
-            s.Quit*/
+            s.Quit
 
             s.StartChromeDriver();
             s.ClearSearch();
             s.AddInSearch("woman");
+            s.Quit();*/
+
+            s.StartChromeDriver();
+            s.ListNewProducts();
             s.Quit();
-
-
 
         }
         public void StartChromeDriver()
         {
             webDriver = new ChromeDriver("C://Users//denis//OneDrive//Desktop//internshipEvozon//Selenium_WebDriver//Selenium_WebDriver//Drivers");
-
-            webDriver.Navigate().GoToUrl("http://qa1magento.dev.evozon.com");
-
+            webDriver.Manage().Window.Maximize();
+            //webDriver.Navigate().GoToUrl("http://qa1magento.dev.evozon.com");
+            webDriver.Navigate().GoToUrl("http://qa2magento.dev.evozon.com");
         }
         public void FindTitle()
         {
@@ -122,5 +124,14 @@ namespace Selenium {
             searchBar.Submit();
         }
 
+        public void ListNewProducts()
+        {
+            IList<IWebElement> newProducts = webDriver.FindElements(By.CssSelector("body > div > div > div.main-container.col1-layout > div > div > div.std > div.widget.widget-new-products > div.widget-products > ul > li"));
+
+            Console.WriteLine("Number NewProducts List " + newProducts.Count());
+
+            foreach(var i in newProducts)
+                Console.WriteLine(i);
+        }
     }
 }
