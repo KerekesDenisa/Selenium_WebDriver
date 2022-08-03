@@ -23,11 +23,18 @@ namespace Selenium {
 
             s.StartChromeDriver();
             s.ClickAccount();
-            s.Quit(); */
+            s.Quit(); 
 
             s.StartChromeDriver();
             s.ListLanquages(1);
+            s.Quit*/
+
+            s.StartChromeDriver();
+            s.ClearSearch();
+            s.AddInSearch("woman");
             s.Quit();
+
+
 
         }
         public void StartChromeDriver()
@@ -102,6 +109,17 @@ namespace Selenium {
             Console.WriteLine("Number Lanquages List " + l.Options.Count);
 
             l.SelectByIndex(number);
+        }
+        public void ClearSearch()
+        {
+            IWebElement searchBar = webDriver.FindElement(By.CssSelector("#search"));
+            searchBar.Clear();
+        }
+        public void AddInSearch(string word)
+        {
+            IWebElement searchBar = webDriver.FindElement(By.CssSelector("#search"));
+            searchBar.SendKeys(word);
+            searchBar.Submit();
         }
 
     }
