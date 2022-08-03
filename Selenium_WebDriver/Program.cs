@@ -64,6 +64,8 @@ namespace Selenium {
                     break;
                 }
             }
+            //sau un switch case pt categories fiecare cu selectorul.
+            //sau metode pt fiecare categories 
         }
         public void NavigateBack()
         {
