@@ -32,11 +32,15 @@ namespace Selenium {
             s.StartChromeDriver();
             s.ClearSearch();
             s.AddInSearch("woman");
-            s.Quit();*/
+            s.Quit();
 
             s.StartChromeDriver();
             s.ListNewProducts();
-            s.Quit();
+            s.Quit();*/
+
+            s.StartChromeDriver();
+
+
 
         }
         public void StartChromeDriver()
