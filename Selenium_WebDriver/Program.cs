@@ -10,12 +10,12 @@ namespace Selenium {
         {
             Selenium s = new Selenium();
 
-            /*s.StartChromeDriver();
+            s.StartChromeDriver();
             s.FindTitle();
             s.FindURL();
             s.FindLogo();
             s.ClickLogo();
-            s.NavigateToPage("WOMEN");
+            s.NavigateNavbar("MEN");
             s.NavigateBack();
             s.NavigateForward();
             s.Refresh();  
@@ -23,23 +23,17 @@ namespace Selenium {
 
             s.StartChromeDriver();
             s.ClickAccount();
-            s.Quit(); 
-
-            s.StartChromeDriver();
             s.ListLanquages(1);
-            s.Quit
+            s.Quit();
 
             s.StartChromeDriver();
             s.ClearSearch();
             s.AddInSearch("woman");
+            s.Quit(); 
+
+            s.StartChromeDriver();
+            s.NavigateNavbar("SALE");
             s.Quit();
-
-            s.StartChromeDriver();
-            s.ListNewProducts();
-            s.Quit();*/
-
-            s.StartChromeDriver();
-
 
 
         }
@@ -47,8 +41,8 @@ namespace Selenium {
         {
             webDriver = new ChromeDriver("C://Users//denis//OneDrive//Desktop//internshipEvozon//Selenium_WebDriver//Selenium_WebDriver//Drivers");
             webDriver.Manage().Window.Maximize();
-            //webDriver.Navigate().GoToUrl("http://qa1magento.dev.evozon.com");
-            webDriver.Navigate().GoToUrl("http://qa2magento.dev.evozon.com");
+            webDriver.Navigate().GoToUrl("http://qa1magento.dev.evozon.com");
+            //webDriver.Navigate().GoToUrl("http://qa2magento.dev.evozon.com");
         }
         public void FindTitle()
         {
@@ -62,17 +56,23 @@ namespace Selenium {
         }
         public void FindLogo()
         {
-            IWebElement getLogo = webDriver.FindElement(By.CssSelector("#header > div > a > img.large"));
+            IWebElement getLogo = webDriver.FindElement(By.CssSelector(".logo"));
             Console.WriteLine("Logo is: " + getLogo);
         }
         public void ClickLogo()
         {
-            IWebElement clickLogo = webDriver.FindElement(By.CssSelector("#header > div > a > img.large"));
+            IWebElement clickLogo = webDriver.FindElement(By.CssSelector(".logo"));
             clickLogo.Click();
         }
-        public void NavigateToPage(string name)
+        public void NavigateNavbar(string name)
         {
-            IList<IWebElement> productList = webDriver.FindElements(By.CssSelector("#nav > ol > li"));
+            IList<IWebElement> productList = webDriver.FindElements(By.CssSelector("#nav li.level0"));
+
+            foreach(var i in productList)
+                Console.WriteLine(i.Text);
+
+            Console.WriteLine("Nr de Categorii este " + productList.Count());
+
             foreach (var i in productList) 
             {
                 if (i.Text.Equals(name))
@@ -103,7 +103,7 @@ namespace Selenium {
         }
         public void ClickAccount()
         {
-            IWebElement clickLogo = webDriver.FindElement(By.CssSelector("#header > div > div.skip-links > div > a > span.label"));
+            IWebElement clickLogo = webDriver.FindElement(By.CssSelector(".skip-link.skip-account"));
             clickLogo.Click();
         }
         public void ListLanquages(int number)
@@ -130,12 +130,16 @@ namespace Selenium {
 
         public void ListNewProducts()
         {
-            IList<IWebElement> newProducts = webDriver.FindElements(By.CssSelector("body > div > div > div.main-container.col1-layout > div > div > div.std > div.widget.widget-new-products > div.widget-products > ul > li"));
+            IList<IWebElement> newProducts = webDriver.FindElements(By.CssSelector(".products-grid.products-grid .item"));
 
             Console.WriteLine("Number NewProducts List " + newProducts.Count());
 
             foreach(var i in newProducts)
                 Console.WriteLine(i);
+        }
+        public void AddToCart()
+        {
+
         }
     }
 }
